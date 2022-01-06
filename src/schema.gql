@@ -1,0 +1,177 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Section {
+  """Example field (placeholder)"""
+  id: Int!
+  section: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  categories: [Category!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Category {
+  id: Int!
+  categoryTitle: String
+  categoryDescription: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  section: Section
+  sectionId: Int!
+  threads: [Thread!]
+}
+
+type Post {
+  id: Int!
+  post: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  thread: Thread
+  threadId: Int
+  author: User
+  authorId: Int
+  deletedAt: DateTime!
+  likingUsers: [User!]!
+}
+
+type Thread {
+  """Example field (placeholder)"""
+  id: Int!
+  threadTitle: String
+  threadDescription: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  author: User
+  authorId: Int
+  category: Category
+  categoryId: Int
+  posts: [Post!]
+  postsCount: Int!
+  latestPost: Post
+}
+
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  password: String!
+  avatar: String!
+  isAdmin: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  threads: [Thread!]!
+  posts: [Post!]!
+  likedPosts: [Post!]!
+  deletedAt: DateTime!
+}
+
+type PostsAndCount {
+  posts: [Post!]!
+  postsCount: Int!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  userByUsername(username: String!): User!
+  categories: [Category!]!
+  category(id: Int!): Category!
+  threads: [Thread!]!
+  thread(id: Int!): Thread!
+  sections: [Section!]!
+  section(id: Int!): Section!
+  posts: [Post!]!
+  postsByThreadId(skip: Int!, take: Int!, id: Int!): [Post!]!
+  postsByAuthorId(order: String!, skip: Int!, take: Int!, id: Int!): [Post!]!
+  post(id: Int!): Post!
+  likedPosts(order: String!, skip: Int!, take: Int!, id: Int!): [Post!]!
+  postsAndCount(skip: Int!, take: Int!, id: Int!): PostsAndCount!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): String!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id: Int!): String!
+  createThread(createThreadInput: CreateThreadInput!): Thread!
+  updateThread(updateThreadInput: UpdateThreadInput!): Thread!
+  removeThread(id: Int!): String!
+  updateLatestPost(post: Int!, threadId: Int!): String!
+  createSection(createSectionInput: CreateSectionInput!): Section!
+  updateSection(updateSectionInput: UpdateSectionInput!): Section!
+  removeSection(id: Int!): String!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: Int!): String!
+  likePost(postId: Int!): String!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+  password: String!
+  avatar: String!
+}
+
+input UpdateUserInput {
+  username: String
+  email: String
+  password: String
+  avatar: String
+  id: Int!
+}
+
+input CreateCategoryInput {
+  categoryTitle: String
+  categoryDescription: String
+  sectionId: Float
+}
+
+input UpdateCategoryInput {
+  categoryTitle: String
+  categoryDescription: String
+  sectionId: Float
+  id: Int!
+}
+
+input CreateThreadInput {
+  threadTitle: String!
+  threadDescription: String!
+  categoryId: Float!
+}
+
+input UpdateThreadInput {
+  threadTitle: String
+  threadDescription: String
+  categoryId: Float
+  id: Int!
+}
+
+input CreateSectionInput {
+  section: String!
+}
+
+input UpdateSectionInput {
+  section: String
+  id: Int!
+}
+
+input CreatePostInput {
+  post: String!
+  threadId: Int!
+}
+
+input UpdatePostInput {
+  post: String
+  threadId: Int
+  id: Int!
+}
