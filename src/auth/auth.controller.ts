@@ -58,11 +58,14 @@ export class AuthController {
     return 'Auth Token Refreshed';
   }
 
-  /*
   @UseGuards(JwtAuthGuard)
   @Get('authenticate')
-  authenticate(@Request() req) {
+  authenticate(@Request() req, @Response() res) {
     const { user } = req;
-    return res.send({ id: user.id, username: user.username, isAdmin: user.isAdmin });
-  }*/
+    return res.send({
+      id: user.id,
+      username: user.username,
+      isAdmin: user.isAdmin,
+    });
+  }
 }

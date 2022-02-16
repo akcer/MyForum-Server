@@ -22,7 +22,10 @@ import { PostsModule } from './posts/posts.module';
       useFactory: (configService: ConfigService) => ({
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
         cors: {
-          origin: configService.get('CLIENT_HOST'),
+          origin: [
+            configService.get('CLIENT_HOST'),
+            configService.get('ANGULAR_APP_CLIENT_HOST'),
+          ],
           credentials: true,
         },
       }),

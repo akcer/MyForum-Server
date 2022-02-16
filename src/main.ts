@@ -8,7 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
   app.enableCors({
-    origin: [configService.get('CLIENT_HOST')],
+    origin: [
+      configService.get('CLIENT_HOST'),
+      configService.get('ANGULAR_APP_CLIENT_HOST'),
+    ],
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());

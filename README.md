@@ -1,6 +1,6 @@
 # MyForumServer
 
-API for [MyForum-React](https://github.com/akcer/MyForum-React) App
+API for [MyForum-React](https://github.com/akcer/MyForum-React) and [MyForum-Angular](https://github.com/akcer/MyForum-Angular) apps
 
 ## Demo
 
@@ -35,6 +35,7 @@ touch .env
 ```bash
 PORT=3001
 CLIENT_HOST=http://localhost:3000
+ANGULAR_APP_CLIENT_HOST=http://localhost:4200
 DB= databese name
 DB_HOST=localhost
 DB_PORT=3306
